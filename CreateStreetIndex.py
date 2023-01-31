@@ -1,4 +1,5 @@
 import os
+import sys
 from collections import defaultdict
 from collections import OrderedDict
 import arcpy
@@ -6,7 +7,7 @@ import arcpy
 def main(argv=None):
     if len(argv) != 5:
         arcpy.AddMessage("Usage: CreateStreetIndex <centerline_feature_class> <centerline_street_name> <index_feature_class> <index_name> <output_file>")
-        return
+        return(1)
 
     (road_centerlines, street_name , index_map, index_name, output_file) = tuple(argv)
 
@@ -52,7 +53,7 @@ def main(argv=None):
     # Loop through the sorted streets and create output
     firstletter = ''
     f = open(output_file, 'w')
-    for street, indexes in sortedstreets.iteritems():
+    for street, indexes in sortedstreets.items():
         if street[0] != firstletter:
             firstletter = street[0]
             f.write(firstletter + '\n')
