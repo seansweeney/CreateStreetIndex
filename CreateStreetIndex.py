@@ -51,6 +51,7 @@ def main(argv=None):
     sortedstreets = OrderedDict(sorted(streets.items()))
 
     # Loop through the sorted streets and create output
+    arcpy.AddMessage(f'--Writing index to {output_file}...')
     firstletter = ''
     f = open(output_file, 'w')
     for street, indexes in sortedstreets.items():
@@ -65,6 +66,7 @@ def main(argv=None):
 #    # Delete intermediate data.
     arcpy.AddMessage('--Cleaning up intermediate data...')
     arcpy.management.Delete(intersect_result)
+    arcpy.AddMessage('--Finished!')
 ## End main function
 
 if __name__ == '__main__':
